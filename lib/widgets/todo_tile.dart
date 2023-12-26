@@ -16,16 +16,19 @@ class TodoTile extends StatelessWidget {
       child: Card(
         child: ListTile(
           title: Text(todos.title),
-          trailing: Checkbox(
-            fillColor: MaterialStateProperty.all<Color>(Colors.white),
-            checkColor: Colors.amber.shade300,
-            side: MaterialStateBorderSide.resolveWith(
-              (states) => BorderSide(width: 1.0, color: Colors.amber.shade300),
+          trailing: Consumer<TodoProvider>(
+            builder: (context, value, child) => Checkbox(
+              fillColor: MaterialStateProperty.all<Color>(Colors.white),
+              checkColor: Colors.amber.shade300,
+              side: MaterialStateBorderSide.resolveWith(
+                (states) =>
+                    BorderSide(width: 1.0, color: Colors.amber.shade300),
+              ),
+              value: todos.done,
+              onChanged: (value) {
+                context.read<TodoProvider>().finishTask(todos.id);
+              },
             ),
-            value: todos.done,
-            onChanged: (value) {
-              context.read<TodoProvider>().finishTask(todos.id);
-            },
           ),
           leading: IconButton(
               onPressed: /*  */

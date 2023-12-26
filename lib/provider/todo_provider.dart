@@ -15,6 +15,7 @@ class TodoProvider extends ChangeNotifier {
   void finishTask(int id) {
     var checked = todos[todos.indexWhere((element) => element.id == id)];
     checked.done = !checked.done;
+    notifyListeners();
   }
 
   void deleteTask(int id) {
